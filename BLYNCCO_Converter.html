@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BLYNCCO CONVERTER</title>
+<style>
+:root{--bg:#0b1020;--panel:#151d32;--panel2:#1c2943;--text:#edf3ff;--muted:#9eacc8;--accent:#6ee7b7;--blue:#7aa7ff;--line:#2b3957;--danger:#ff8181}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#172747 0,#0b1020 48%);font:15px system-ui,Arial;color:var(--text);min-height:100vh;padding:24px}
+.wrap{max-width:900px;margin:auto}.app-header{width:100%;min-height:88px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px 18px;margin:0 0 24px;border:1px solid #30415f;border-radius:18px;background:linear-gradient(110deg,#17243b,#101a2d);box-shadow:0 12px 34px #0005;position:relative;overflow:hidden}.app-header:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,#6ee7b70b,transparent);pointer-events:none}.brand-copy{display:flex;flex-direction:column;align-items:center;gap:3px;letter-spacing:.16em;position:relative}.brand-copy strong{font-size:clamp(17px,3vw,21px);color:#f4f8ff;font-weight:900}.brand-copy span{font-size:11px;font-weight:800;color:var(--accent);letter-spacing:.34em}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:18px 0}.tab{border:1px solid var(--line);border-radius:14px;background:#111a2d;color:var(--muted);padding:14px 8px;font-weight:800;cursor:pointer}.tab.active{background:#203754;color:#fff;border-color:#4d8a9c;box-shadow:inset 0 -3px var(--accent)}.panel{background:linear-gradient(145deg,var(--panel),#10182a);border:1px solid var(--line);border-radius:20px;padding:clamp(16px,3vw,26px);box-shadow:0 16px 50px #0005}.panel h2{margin:0 0 7px;font-size:23px}.sub{color:var(--muted);line-height:1.55;margin:0 0 18px}.drop{width:min(100%,560px);min-height:190px;margin:12px auto 0;border:2px dashed #526789;border-radius:20px;padding:34px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at 50% 0%,#1a2b46,#0d1629 72%);cursor:pointer;transition:.2s;box-shadow:inset 0 1px #ffffff08}.drop-icon{width:54px;height:54px;display:grid;place-items:center;margin-bottom:7px;border:1px solid #49617f;border-radius:16px;background:#172943;box-shadow:0 8px 20px #0003}.drop-icon svg{width:29px;height:29px;fill:none;stroke:#8cebc9;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 3px 7px #6ee7b733)}.drop.drag{border-color:var(--accent);background:#12302d}.drop strong{display:block;font-size:17px;margin:7px}.drop small{color:var(--muted)}input[type=file]{display:none}.actions{display:flex;gap:10px;flex-wrap:nowrap;justify-content:center;margin:18px auto 0;max-width:560px}.actions .btn{flex:1;min-width:0;letter-spacing:.06em}.btn{border:0;border-radius:12px;padding:13px 18px;font-weight:850;cursor:pointer;background:var(--accent);color:#06231c}.btn.secondary{background:#263652;color:#e7efff;border:1px solid #3b4d6d}.btn:disabled{opacity:.45;cursor:not-allowed}.fileline{margin-top:14px;padding:12px;border-radius:12px;background:#0c1527;color:#cbd8f0;overflow-wrap:anywhere}.status{margin-top:14px;padding:12px;border-radius:12px;background:#0c1527;color:var(--muted);line-height:1.5;white-space:pre-wrap}.status.good{color:var(--accent)}.status.bad{color:var(--danger)}.status.dds-success{text-align:center;white-space:normal}.status.dds-success strong{display:block;font-size:16px;font-weight:900;letter-spacing:.06em}.status.dds-success span{display:block;margin-top:4px;font-size:12px;font-weight:700;letter-spacing:.025em}.preview{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:15px}.preview img{max-width:min(100%,260px);max-height:220px;object-fit:contain;background:repeating-conic-gradient(#25334d 0% 25%,#17243a 0% 50%) 50%/18px 18px;border-radius:10px;border:1px solid var(--line)}.note{font-size:13px;color:var(--muted);line-height:1.6;margin-top:18px}.progress{height:10px;background:#26334c;border-radius:20px;overflow:hidden;margin-top:14px;display:none;position:relative}.bar{height:100%;width:0;background:var(--accent);transition:width .2s}.progress-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px;font-size:12px;color:#cbd8f0;font-weight:800}.progress-meta .pct{color:var(--accent);font-variant-numeric:tabular-nums}.progress.indeterminate .bar{width:35%!important;animation:blyProgressMove 1.2s ease-in-out infinite alternate}@keyframes blyProgressMove{from{transform:translateX(-15%)}to{transform:translateX(210%)}}.hide{display:none!important}a.download{display:inline-block;margin-top:12px;color:#9ed8ff;font-weight:800}.footer{text-align:center;color:#71809d;font-size:11px;font-weight:900;letter-spacing:.24em;padding:24px 10px 12px}
+@media(max-width:560px){body{padding:14px}.app-header{min-height:78px;padding:12px 14px;margin-bottom:18px}.tabs{gap:6px}.tab{font-size:12px;padding:12px 4px}.panel{border-radius:16px}.drop{min-height:170px;padding:28px 12px}.actions{gap:8px}.actions .btn{padding:13px 10px}}
+
+.dds-options{max-width:560px;margin:14px auto 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:#0d1729}
+.option{display:grid;gap:7px}.option label{font-size:13px;font-weight:800;color:#cbd8f0}
+.option select{width:100%;padding:12px;border-radius:10px;border:1px solid #405474;background:#17243a;color:var(--text);font:inherit}
+.check-option{display:flex;align-items:center;gap:9px;margin-top:12px;font-size:13px;color:#dce7fa;font-weight:700}
+.check-option input{width:17px;height:17px;accent-color:var(--accent)}
+.option-hint{font-size:12px;line-height:1.55;color:var(--muted);margin:10px 0 0}
+
+
+.format-noted{margin:-8px 0 18px;padding:13px 14px;border:1px solid #354969;border-radius:16px;background:linear-gradient(135deg,#17263e,#101a2d);box-shadow:0 10px 28px #0003}
+.noted-heading{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.noted-mark{width:27px;height:27px;display:grid;place-items:center;border-radius:9px;background:#213c4a;border:1px solid #397064;color:var(--accent);font-weight:950}
+.noted-heading strong{display:block;font-size:13px;letter-spacing:.18em;color:#f3f7ff}
+.noted-heading small{display:block;margin-top:2px;color:var(--muted);font-size:11px}
+.noted-table-wrap{width:100%;overflow:hidden;border:1px solid #2b3b58;border-radius:10px}
+.noted-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:clamp(9px,2.6vw,12px)}
+.noted-table th,.noted-table td{padding:9px 4px;text-align:center;vertical-align:middle;overflow-wrap:anywhere;line-height:1.25;border-bottom:1px solid #293953}
+.noted-table thead th{background:#1b2a43;color:#b8c9e3;font-size:clamp(8px,2.35vw,10px);letter-spacing:.025em}
+.noted-table thead th:first-child,.noted-table tbody th{width:27%;text-align:left;padding-left:8px}
+.noted-table tbody th{background:#142239;color:#9fb3d2;font-size:clamp(8px,2.25vw,10px);letter-spacing:.015em}
+.noted-table td{background:#111d31;color:#dce6f7}
+/* Warna isi kolom saja, tanpa garis luar tambahan */
+.noted-table tr>*:nth-child(1){background:rgba(220,55,35,.13)}
+.noted-table tr>*:nth-child(2){background:rgba(25,105,235,.15)}
+.noted-table tr>*:nth-child(3){background:rgba(35,170,75,.15)}
+.noted-table tr>*:nth-child(4){background:rgba(230,190,25,.16)}
+.format-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid #405879;border-radius:13px;background:linear-gradient(120deg,#1c2d48,#142139);color:#edf3ff;text-align:left;cursor:pointer}
+.format-toggle>span:first-child{display:flex;flex-direction:column;gap:3px}
+.format-toggle small{font-size:9px;letter-spacing:.14em;color:#91a7c7;font-weight:800}
+.format-toggle strong{font-size:13px;letter-spacing:.06em}
+.toggle-current{display:flex;align-items:center;gap:12px;color:var(--accent);font-weight:900}
+.toggle-current b{font-size:12px}
+#ddsFormatChevron{font-size:20px;line-height:1;font-weight:900}
+.format-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:10px}
+.format-choice-grid .format-noted{grid-column:1/-1;margin:0}
+.format-choice{display:block;cursor:pointer;min-width:0}
+.format-choice input{position:absolute;opacity:0;pointer-events:none}
+.choice-card{display:flex;min-height:126px;flex-direction:column;gap:9px;padding:12px;border:1px solid #344967;border-radius:13px;background:linear-gradient(150deg,#192943,#111c30);transition:border-color .18s,background .18s,transform .18s,box-shadow .18s}
+.format-choice:hover .choice-card{border-color:#6685aa;transform:translateY(-1px)}
+.format-choice input:checked + .choice-card{border-color:var(--accent);background:linear-gradient(150deg,#1b3b3b,#14283a);box-shadow:inset 0 0 0 1px #6ee7b733,0 6px 18px #0003}
+.format-choice input:focus-visible + .choice-card{outline:2px solid #9ed8ff;outline-offset:3px}
+.choice-top{display:flex;align-items:center;justify-content:space-between;gap:5px}
+.choice-top b{font-size:14px;color:#f3f7ff}
+.choice-tag{font-size:9px;font-weight:900;letter-spacing:.08em;color:#9fb3d2;border:1px solid #405474;border-radius:6px;padding:3px 5px}
+.format-choice input:checked + .choice-card .choice-tag{color:var(--accent);border-color:#477d70}
+.choice-desc{font-size:11px;line-height:1.4;color:#aebdd5;min-height:31px}
+.choice-meta{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:7px;border-top:1px solid #30415d;font-size:10px;color:#8fa2c0}
+.choice-meta strong{color:#e5efff;font-size:11px}
+@media(max-width:560px){.format-choice-grid{grid-template-columns:1fr}.choice-card{min-height:0}.choice-desc{min-height:0}.format-noted{padding:10px}.noted-table th,.noted-table td{padding:8px 3px}.format-toggle{padding:11px 12px}}
+
+/* BLYNCCO PRO enhancements */
+.tool-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 16px}
+.tool-stat{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#0e192b;min-width:0}
+.tool-stat b{display:block;font-size:11px;letter-spacing:.09em;color:var(--accent)}
+.tool-stat span{display:block;margin-top:4px;font-size:11px;color:var(--muted);overflow-wrap:anywhere}
+.media-preview{display:grid;gap:9px;margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:13px;background:#0c1527}
+.media-preview audio,.media-preview video{width:100%;max-height:280px}
+.media-preview .preview-meta{font-size:12px;line-height:1.55;color:var(--muted);overflow-wrap:anywhere}
+.advanced-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.advanced-grid .option{min-width:0}
+.advanced-grid input,.advanced-grid select{width:100%;padding:11px;border-radius:10px;border:1px solid #405474;background:#17243a;color:var(--text);font:inherit;min-width:0}
+.switchline{display:flex;align-items:center;gap:9px;margin-top:12px;color:#dce7fa;font-size:13px;font-weight:700}
+.switchline input{width:17px;height:17px;accent-color:var(--accent)}
+.capability{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:12px}
+.capability span{padding:5px 8px;border:1px solid #344967;border-radius:8px;color:#aebdd5;background:#111d31;font-size:10px;font-weight:800;letter-spacing:.04em}
+.btn:focus-visible,.tab:focus-visible,.drop:focus-within{outline:2px solid #9ed8ff;outline-offset:3px}
+@media(max-width:560px){.tool-meta{gap:6px}.tool-stat{padding:9px 7px}.tool-stat b{font-size:9px}.tool-stat span{font-size:10px}.advanced-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="app-header"><div class="brand-copy"><strong>BLYNCCO CONVERTER</strong><span>MEDIA CONVERSION TOOLS</span></div></header>
+
+
+<div class="tool-meta" aria-label="Ringkasan aplikasi"><div class="tool-stat"><b>3 MODUL</b><span>Image • Audio • Video</span></div><div class="tool-stat"><b>LOCAL PROCESSING</b><span>File diproses di browser</span></div><div class="tool-stat"><b>PRO WORKFLOW</b><span>Preview • Preset • Download</span></div></div>
+<nav class="tabs" role="tablist" aria-label="Kategori konversi"><button class="tab active" data-tab="dds" role="tab" aria-selected="true">DDS ⇄ PNG</button><button class="tab" data-tab="audio" role="tab" aria-selected="false">MP3 → OGG</button><button class="tab" data-tab="video" role="tab" aria-selected="false">VIDEO → MP3</button></nav>
+<section class="panel" id="dds"><h2>Konversi DDS ⇄ PNG</h2>
+<label class="drop" id="ddsDrop"><span class="drop-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"></rect><circle cx="8.5" cy="8.5" r="1.7"></circle><path d="m21 15-5-5L5 21"></path></svg></span><strong>Pilih file DDS atau PNG</strong><small>Tekan untuk memilih atau seret file ke sini</small><input id="ddsFile" type="file" accept=".dds,.png,image/png"></label>
+<div class="fileline hide" id="ddsInfo"></div>
+<div id="ddsOptions" class="dds-options">
+  <button type="button" id="ddsFormatToggle" class="format-toggle" aria-expanded="false" aria-controls="ddsFormatChoices">
+    <span><small>FORMAT OUTPUT</small><strong>PILIH FORMAT DDS</strong></span>
+    <span class="toggle-current"><b id="ddsFormatCurrent">DXT5</b><span id="ddsFormatChevron">+</span></span>
+  </button>
+  <div id="ddsFormatChoices" class="format-choice-grid hide" role="radiogroup" aria-label="Format DDS">
+    <section class="format-noted" aria-label="Catatan format DDS">
+  <div class="noted-heading">
+    <span class="noted-mark">i</span>
+    <div><strong>NOTED</strong><small>Perbandingan format tekstur DDS</small></div>
+  </div>
+  <div class="noted-table-wrap">
+    <table class="noted-table">
+      <thead><tr><th>FORMAT</th><th>DXT1</th><th>DXT5</th><th>RGBA-32bit</th></tr></thead>
+      <tbody>
+        <tr><th>TRANSPARAN</th><td>Terbatas</td><td>Alpha penuh</td><td>Alpha penuh</td></tr>
+        <tr><th>KOMPRESI</th><td>Ya</td><td>Ya</td><td>Tidak</td></tr>
+        <tr><th>UKURAN</th><td>Kecil</td><td>Sedang</td><td>Besar</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+    <label class="format-choice">
+      <input type="radio" name="ddsFormat" value="dxt1">
+      <span class="choice-card">
+        <span class="choice-top"><b>DXT1</b><span class="choice-tag">BC1</span></span>
+        <span class="choice-desc">Untuk tekstur tanpa alpha halus</span>
+        <span class="choice-meta"><span>Kompresi</span><strong>Kecil</strong></span>
+      </span>
+    </label>
+    <label class="format-choice selected">
+      <input type="radio" name="ddsFormat" value="dxt5" checked>
+      <span class="choice-card">
+        <span class="choice-top"><b>DXT5</b><span class="choice-tag">BC3</span></span>
+        <span class="choice-desc">Mendukung alpha penuh</span>
+        <span class="choice-meta"><span>Kompresi</span><strong>Sedang</strong></span>
+      </span>
+    </label>
+    <label class="format-choice">
+      <input type="radio" name="ddsFormat" value="rgba">
+      <span class="choice-card">
+        <span class="choice-top"><b>RGBA-32BIT</b><span class="choice-tag">RAW</span></span>
+        <span class="choice-desc">Warna dan alpha tanpa kompresi</span>
+        <span class="choice-meta"><span>Kompresi</span><strong>Tidak ada</strong></span>
+      </span>
+    </label>
+  </div>
+  <label class="check-option"><input type="checkbox" id="ddsMips" checked> MIPMAP</label>
+  <p class="option-hint">gunakan DXT5 jika PNG memiliki transparansi. DXT1 cocok untuk tekstur tanpa transparansi.</p>
+</div>
+<div class="preview" id="ddsPreview"></div><div class="actions"><button class="btn" id="ddsConvert" disabled>CONVERT</button><button class="btn secondary" id="ddsClear">HAPUS</button></div><div class="status" id="ddsStatus">Pilih file untuk mulai.</div></section>
+<section class="panel hide" id="audio"><h2>Konversi MP3 ke OGG</h2><p class="sub">Konversi berjalan di browser menggunakan FFmpeg WebAssembly. Pilih format dan kualitas output.</p>
+<label class="drop" id="audioDrop"><span class="drop-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></span><strong>Pilih file MP3</strong><small>Format masukan: MP3</small><input id="audioFile" type="file" accept="audio/mpeg,.mp3"></label><div class="fileline hide" id="audioInfo"></div><div class="dds-options"><div class="advanced-grid"><div class="option"><label for="audioOutput">FORMAT OUTPUT</label><select id="audioOutput"><option value="ogg" selected>OGG Vorbis • ukuran efisien</option><option value="wav">WAV PCM • tanpa kompresi</option><option value="flac">FLAC • lossless</option></select></div><div class="option" id="oggQualityWrap"><label for="oggQuality">KUALITAS OGG</label><select id="oggQuality"><option value="3">Hemat • Q3</option><option value="5" selected>Standar • Q5</option><option value="7">Tinggi • Q7</option><option value="9">Maksimum • Q9</option></select></div></div><label class="switchline"><input type="checkbox" id="audioNormalize"> Normalisasi volume otomatis (Loudness)</label><p class="option-hint">WAV dan FLAC mempertahankan kualitas sumber yang tersedia. Konversi dari MP3 ke format lossless tidak mengembalikan detail yang sudah hilang pada MP3.</p></div><div class="media-preview hide" id="audioPreview"></div><div class="actions"><button class="btn" id="audioConvert" disabled>CONVERT</button><button class="btn secondary" id="audioClear">HAPUS</button></div><div class="progress" id="audioProgress"><div class="bar" id="audioBar"></div></div><div class="progress-meta" id="audioProgressMeta"><span id="audioStage">Menunggu…</span><span class="pct" id="audioPct">0%</span></div><div class="status" id="audioStatus">Pilih file MP3 untuk mulai.</div></section>
+<section class="panel hide" id="video"><h2>Video → MP3 / Video</h2>
+<p class="sub">Pilih video dari perangkat atau tempel tautan langsung ke file video yang memang boleh diunduh.</p>
+<label class="drop" id="videoDrop"><span class="drop-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="13" height="14" rx="2"></rect><path d="m16 10 5-3v10l-5-3z"></path></svg></span><strong>Pilih file video</strong><small>Contoh: MP4, MOV, MKV, WEBM, AVI</small><input id="videoFile" type="file" accept="video/*,.mkv,.avi,.mov,.webm"></label>
+<div class="dds-options"><div class="option"><label for="videoUrl">ATAU TEMPEL LINK VIDEO LANGSUNG</label><input id="videoUrl" type="url" placeholder="https://contoh.com/video.mp4" style="width:100%;padding:12px;border-radius:10px;border:1px solid #405474;background:#17243a;color:var(--text);font:inherit"></div><div class="actions"><button class="btn secondary" id="videoPaste">TEMPEL LINK</button><button class="btn secondary" id="videoCheck">PERIKSA LINK</button><button class="btn secondary" id="videoDownload" disabled>DOWNLOAD VIDEO ASLI</button></div><p class="option-hint">Link harus mengarah langsung ke file media dan mengizinkan akses CORS. Link halaman YouTube bukan direct video URL dan tidak dapat diambil langsung oleh HTML browser-only.</p></div>
+<div class="fileline hide" id="videoInfo"></div><div class="dds-options"><div class="option"><label for="videoResolution">RESOLUSI VIDEO OUTPUT</label><select id="videoResolution"><option value="original">Asli (tanpa ubah resolusi)</option><option value="1080">1080p</option><option value="720">720p</option><option value="480">480p</option><option value="360">360p</option></select></div><div class="option" style="margin-top:12px"><label for="videoBitrate">KUALITAS MP3</label><select id="videoBitrate"><option value="128k">128 kbps</option><option value="192k" selected>192 kbps</option><option value="256k">256 kbps</option><option value="320k">320 kbps</option></select></div><div class="advanced-grid"><div class="option"><label for="videoStart">MULAI DARI (DETIK)</label><input id="videoStart" type="number" min="0" step="0.1" value="0"></div><div class="option"><label for="videoEnd">AKHIR PADA (DETIK)</label><input id="videoEnd" type="number" min="0" step="0.1" placeholder="Durasi penuh"></div></div><label class="switchline"><input type="checkbox" id="videoNormalize"> Normalisasi volume audio</label><p class="option-hint">Atur rentang waktu untuk mengambil bagian tertentu. Kosongkan waktu akhir untuk memproses sampai selesai.</p></div>
+<div class="media-preview hide" id="videoPreview"></div><div class="actions"><button class="btn" id="videoConvert" disabled>CONVERT KE MP3</button><button class="btn secondary" id="videoConvertMp4" disabled>CONVERT VIDEO</button><button class="btn secondary" id="videoClear">HAPUS</button></div><div class="progress" id="videoProgress"><div class="bar" id="videoBar"></div></div><div class="progress-meta" id="videoProgressMeta"><span id="videoStage">Menunggu…</span><span class="pct" id="videoPct">0%</span></div><div class="status" id="videoStatus">Pilih file video atau periksa tautan langsung.</div></section>
+<div class="footer">BLYNCCO CONVERTER</div></div>
+<script>
+const $=id=>document.getElementById(id);let selected={dds:null,audio:null,video:null},outputs={dds:null,audio:null,video:null};
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-selected',String(x===b))});['dds','audio','video'].forEach(k=>$(k).classList.toggle('hide',k!==b.dataset.tab));});
+function fmt(n){if(n<1024)return n+' B';let u=['KB','MB','GB'];let i=-1;do{n/=1024;i++}while(n>=1024&&i<u.length-1);return n.toFixed(2)+' '+u[i]}
+function status(id,msg,kind=''){const e=$(id);e.textContent=msg;e.className='status '+kind}
+function showDdsSuccess(){const e=$('ddsStatus');e.className='status good dds-success';e.innerHTML='<strong>CONVERT SUCCESS</strong><span>KLIK DOWNLOAD UNTUK MENYIMPAN</span>'; }
+function showMediaPreview(kind,file){const box=$(kind+'Preview');if(!box)return;box.innerHTML='';if(!file){box.classList.add('hide');return}const url=URL.createObjectURL(file),media=document.createElement(kind==='audio'?'audio':'video');media.controls=true;media.preload='metadata';media.src=url;if(kind==='video')media.playsInline=true;const meta=document.createElement('div');meta.className='preview-meta';meta.textContent=file.name+' • '+fmt(file.size)+' • '+(file.type||'tipe media tidak terdeteksi');box.append(media,meta);box.classList.remove('hide');media.addEventListener('loadedmetadata',()=>{const d=Number.isFinite(media.duration)?Math.round(media.duration)+' detik':'durasi tidak diketahui';meta.textContent=file.name+' • '+fmt(file.size)+' • '+d+' • '+(kind==='video'?media.videoWidth+'×'+media.videoHeight:'audio')});media.addEventListener('error',()=>{meta.textContent=file.name+' • '+fmt(file.size)+' • Preview tidak didukung browser; file tetap dapat dicoba dikonversi.'})}
+function setupPick(kind){const inp=$(kind+'File'),drop=$(kind+'Drop'),info=$(kind+'Info'),btn=$(kind+'Convert');inp.onchange=()=>{let f=inp.files[0];selected[kind]=f||null;outputs[kind]=null;if(kind==='video')outputs.videoMp4=null;info.textContent=f?`${f.name} • ${fmt(f.size)}`:'';info.classList.toggle('hide',!f);btn.disabled=!f;btn.textContent='CONVERT';if(kind==='video'&&$('videoConvertMp4'))$('videoConvertMp4').disabled=!f;if(kind==='dds'){$('ddsPreview').innerHTML='';if(f&&f.type==='image/png'){let im=document.createElement('img');im.src=URL.createObjectURL(f);$('ddsPreview').append(im)}}if(kind==='audio'||kind==='video')showMediaPreview(kind,f);status(kind+'Status',f?'File siap dikonversi.':'Pilih file untuk mulai.');};drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('drag')});drop.addEventListener('dragleave',()=>drop.classList.remove('drag'));drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('drag');if(e.dataTransfer.files.length){inp.files=e.dataTransfer.files;inp.dispatchEvent(new Event('change'))}});$(kind+'Clear').onclick=()=>{inp.value='';selected[kind]=null;outputs[kind]=null;info.textContent='';info.classList.add('hide');btn.disabled=true;btn.textContent='CONVERT';if(kind==='video'&&$('videoConvertMp4'))$('videoConvertMp4').disabled=true;if(kind==='dds')$('ddsPreview').innerHTML='';if(kind==='audio'||kind==='video'){$(kind+'Preview').innerHTML='';$(kind+'Preview').classList.add('hide')}status(kind+'Status','Pilih file untuk mulai.');};}
+['dds','audio','video'].forEach(setupPick);
+function saveBlob(blob,name){let a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),30000)}
+function readDDS(buf){const v=new DataView(buf);if(v.getUint32(0,true)!==0x20534444)throw Error('Header DDS tidak valid.');const h=v.getUint32(12,true),w=v.getUint32(16,true),pfFlags=v.getUint32(80,true),four=v.getUint32(84,true),bits=v.getUint32(88,true),rm=v.getUint32(92,true),gm=v.getUint32(96,true),bm=v.getUint32(100,true),am=v.getUint32(104,true);if(!w||!h||w>16384||h>16384)throw Error('Ukuran gambar tidak valid atau terlalu besar.');let off=128,fmt='';if(pfFlags&4){fmt=String.fromCharCode(four&255,(four>>>8)&255,(four>>>16)&255,(four>>>24)&255);if(fmt==='DXT1')fmt='dxt1';else if(fmt==='DXT3')fmt='dxt3';else if(fmt==='DXT5')fmt='dxt5';else throw Error('Format DDS '+fmt+' belum didukung.');}else if(!(pfFlags&0x40)||![24,32].includes(bits))throw Error('DDS harus DXT1/DXT3/DXT5 atau RGB/RGBA 24/32-bit.');
+const out=new Uint8ClampedArray(w*h*4),u8=new Uint8Array(buf);if(fmt){let bw=Math.ceil(w/4),bh=Math.ceil(h/4),block=fmt==='dxt1'?8:16,need=bw*bh*block;if(off+need>buf.byteLength)throw Error('Data DDS terpotong.');for(let by=0;by<bh;by++)for(let bx=0;bx<bw;bx++){let p=off+(by*bw+bx)*block,alpha=new Uint8Array(16).fill(255);if(fmt==='dxt3'){for(let i=0;i<8;i++){let z=u8[p+i];alpha[i*2]=(z&15)*17;alpha[i*2+1]=(z>>4)*17;}p+=8;}else if(fmt==='dxt5'){let a0=u8[p],a1=u8[p+1],tab=[a0,a1];if(a0>a1){for(let i=1;i<=6;i++)tab.push(Math.round(((7-i)*a0+i*a1)/7));}else{for(let i=1;i<=4;i++)tab.push(Math.round(((5-i)*a0+i*a1)/5));tab.push(0,255);}let bitsA=0n;for(let i=0;i<6;i++)bitsA|=BigInt(u8[p+2+i])<<BigInt(8*i);for(let i=0;i<16;i++)alpha[i]=tab[Number((bitsA>>BigInt(3*i))&7n)];p+=8;}
+let c0=u8[p]|u8[p+1]<<8,c1=u8[p+2]|u8[p+3]<<8;const rgb=c=>[((c>>11)&31)*255/31,((c>>5)&63)*255/63,(c&31)*255/31].map(Math.round);let a=rgb(c0),b=rgb(c1),cs=[a,b];if(c0>c1||fmt!=='dxt1'){cs.push([0,1,2].map(i=>Math.round((2*a[i]+b[i])/3)),[0,1,2].map(i=>Math.round((a[i]+2*b[i])/3)));}else{cs.push([0,1,2].map(i=>Math.round((a[i]+b[i])/2)),[0,0,0]);}let ix=u8[p+4]|u8[p+5]<<8|u8[p+6]<<16|u8[p+7]<<24;for(let j=0;j<16;j++){let x=bx*4+j%4,y=by*4+Math.floor(j/4);if(x>=w||y>=h)continue;let ci=(ix>>>(2*j))&3,q=(y*w+x)*4,c=cs[ci];out[q]=c[0];out[q+1]=c[1];out[q+2]=c[2];out[q+3]=(fmt==='dxt1'&&c0<=c1&&ci===3)?0:alpha[j];}}}
+else{let bytes=bits/8,need=w*h*bytes;if(off+need>buf.byteLength)throw Error('Data DDS terpotong.');function ch(px,mask,def){if(!mask)return def;let shift=0;while(((mask>>>shift)&1)===0)shift++;let m=mask>>>shift,val=(px&mask)>>>shift;return Math.round(val*255/m)}for(let i=0;i<w*h;i++){let p=off+i*bytes,px=bytes===4?v.getUint32(p,true):(u8[p]|u8[p+1]<<8|u8[p+2]<<16);out[i*4]=ch(px,rm,0);out[i*4+1]=ch(px,gm,0);out[i*4+2]=ch(px,bm,0);out[i*4+3]=ch(px,am,255);}}
+return {w,h,data:out,format:fmt||'RGB '+bits};}
+
+function rgb565(r,g,b){return ((Math.round(r*31/255)<<11)|(Math.round(g*63/255)<<5)|Math.round(b*31/255))&65535}
+function unpack565(v){return [Math.round(((v>>11)&31)*255/31),Math.round(((v>>5)&63)*255/63),Math.round((v&31)*255/31)]}
+function put16(a,o,v){a[o]=v&255;a[o+1]=(v>>8)&255}
+function put32(a,o,v){a[o]=v&255;a[o+1]=(v>>>8)&255;a[o+2]=(v>>>16)&255;a[o+3]=(v>>>24)&255}
+function colorBlock(px, allowAlpha=false){
+  let lo=[255,255,255],hi=[0,0,0];
+  for(let i=0;i<16;i++){if(allowAlpha&&px[i*4+3]<128)continue;for(let c=0;c<3;c++){let v=px[i*4+c];if(v<lo[c])lo[c]=v;if(v>hi[c])hi[c]=v}}
+  if(lo[0]===255&&lo[1]===255&&lo[2]===255&&hi[0]===0&&hi[1]===0&&hi[2]===0)lo=hi=[0,0,0];
+  let c0=rgb565(...hi),c1=rgb565(...lo);
+  if(c0<=c1){if(c1<65535)c0=c1+1;else c1=c0-1}
+  let a=unpack565(c0),b=unpack565(c1),pal=[a,b,[0,1,2].map(i=>Math.round((2*a[i]+b[i])/3)),[0,1,2].map(i=>Math.round((a[i]+2*b[i])/3))],bits=0;
+  for(let i=0;i<16;i++){let best=0,dist=Infinity;if(allowAlpha&&px[i*4+3]<128){best=3;}else for(let k=0;k<4;k++){let d=0;for(let c=0;c<3;c++){let z=px[i*4+c]-pal[k][c];d+=z*z}if(d<dist){dist=d;best=k}}bits|=best<<(2*i)}
+  return [c0,c1,bits>>>0];
+}
+function encodeBC1Block(px){let [c0,c1,ix]=colorBlock(px,false),o=new Uint8Array(8);put16(o,0,c0);put16(o,2,c1);put32(o,4,ix);return o}
+function encodeBC3Block(px){
+  let amin=255,amax=0;for(let i=0;i<16;i++){let a=px[i*4+3];amin=Math.min(amin,a);amax=Math.max(amax,a)}
+  let tab=[amax,amin];if(amax>amin){for(let i=1;i<=6;i++)tab.push(Math.round(((7-i)*amax+i*amin)/7))}
+  else{for(let i=1;i<=4;i++)tab.push(Math.round(((5-i)*amax+i*amin)/5));tab.push(0,255)}
+  let abits=0n;for(let i=0;i<16;i++){let best=0,dist=Infinity;for(let k=0;k<8;k++){let d=Math.abs(px[i*4+3]-tab[k]);if(d<dist){dist=d;best=k}}abits|=BigInt(best)<<BigInt(3*i)}
+  let out=new Uint8Array(16);out[0]=amax;out[1]=amin;for(let i=0;i<6;i++)out[2+i]=Number((abits>>BigInt(8*i))&255n);
+  let [c0,c1,ix]=colorBlock(px,false);put16(out,8,c0);put16(out,10,c1);put32(out,12,ix);return out;
+}
+function getBlockPixels(data,w,h,bx,by){
+  let px=new Uint8Array(64);for(let y=0;y<4;y++)for(let x=0;x<4;x++){let sx=Math.min(w-1,bx*4+x),sy=Math.min(h-1,by*4+y),src=(sy*w+sx)*4,dst=(y*4+x)*4;px.set(data.subarray(src,src+4),dst)}return px;
+}
+function compressLevel(level,fmt){
+  if(fmt==='rgba')return new Uint8Array(level.data);
+  let bw=Math.ceil(level.w/4),bh=Math.ceil(level.h/4),block=fmt==='dxt1'?8:16,out=new Uint8Array(bw*bh*block),o=0;
+  for(let y=0;y<bh;y++)for(let x=0;x<bw;x++){let px=getBlockPixels(level.data,level.w,level.h,x,y),b=fmt==='dxt1'?encodeBC1Block(px):encodeBC3Block(px);out.set(b,o);o+=block}
+  return out;
+}
+async function makeMipLevels(bmp,enabled){
+  let levels=[],w=bmp.width,h=bmp.height,c=document.createElement('canvas');c.width=w;c.height=h;let ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(bmp,0,0);levels.push({w,h,data:ctx.getImageData(0,0,w,h).data});
+  while(enabled&&(w>1||h>1)){let nw=Math.max(1,Math.floor(w/2)),nh=Math.max(1,Math.floor(h/2)),next=document.createElement('canvas');next.width=nw;next.height=nh;let nctx=next.getContext('2d',{willReadFrequently:true});nctx.imageSmoothingEnabled=true;nctx.imageSmoothingQuality='high';nctx.drawImage(c,0,0,nw,nh);c=next;w=nw;h=nh;levels.push({w,h,data:nctx.getImageData(0,0,w,h).data})}
+  return levels;
+}
+function levelsToDDS(levels,fmt){
+  let compressed=fmt!=='rgba',four=fmt==='dxt1'?'DXT1':fmt==='dxt5'?'DXT5':'',encoded=levels.map(l=>compressLevel(l,fmt));
+  let total=128+encoded.reduce((n,a)=>n+a.length,0),buf=new ArrayBuffer(total),v=new DataView(buf),u=new Uint8Array(buf);
+  put32(u,0,0x20534444);put32(u,4,124);
+  let flags=0x1|0x2|0x4|0x1000|(compressed?0x80000:0x8);if(levels.length>1)flags|=0x20000;
+  put32(u,8,flags);put32(u,12,levels[0].h);put32(u,16,levels[0].w);put32(u,20,compressed?encoded[0].length:levels[0].w*4);put32(u,24,0);put32(u,28,levels.length);
+  put32(u,76,32);
+  if(compressed){put32(u,80,4);put32(u,84,four.charCodeAt(0)|(four.charCodeAt(1)<<8)|(four.charCodeAt(2)<<16)|(four.charCodeAt(3)<<24));}
+  else{put32(u,80,0x41);put32(u,88,32);put32(u,92,0x000000ff);put32(u,96,0x0000ff00);put32(u,100,0x00ff0000);put32(u,104,0xff000000);}
+  put32(u,108,0x1000|(levels.length>1?0x8|0x400000:0));
+  let off=128;for(const a of encoded){u.set(a,off);off+=a.length}
+  return new Blob([buf],{type:'application/octet-stream'});
+}
+
+
+const ddsFormatToggle=$('ddsFormatToggle'),ddsFormatChoices=$('ddsFormatChoices');
+ddsFormatToggle.onclick=()=>{
+  const opening=ddsFormatChoices.classList.contains('hide');
+  ddsFormatChoices.classList.toggle('hide',!opening);
+  ddsFormatToggle.setAttribute('aria-expanded',String(opening));
+  $('ddsFormatChevron').textContent=opening?'×':'+';
+};
+document.querySelectorAll('input[name="ddsFormat"]').forEach(r=>r.addEventListener('change',()=>{
+  document.querySelectorAll('.format-choice').forEach(card=>card.classList.toggle('selected',card.querySelector('input').checked));
+  const selectedFormat=document.querySelector('input[name="ddsFormat"]:checked').value;
+  $('ddsFormatCurrent').textContent=selectedFormat==='rgba'?'RGBA-32BIT':selectedFormat.toUpperCase();
+  ddsFormatChoices.classList.add('hide');
+  ddsFormatToggle.setAttribute('aria-expanded','false');
+  $('ddsFormatChevron').textContent='+';
+}));
+
+$('ddsConvert').onclick=async()=>{let f=selected.dds;if(!f)return;let btn=$('ddsConvert');if(outputs.dds){saveBlob(outputs.dds.blob,outputs.dds.name);return;}btn.disabled=true;try{let blob,name;if(f.name.toLowerCase().endsWith('.dds')){let r=readDDS(await f.arrayBuffer()),c=document.createElement('canvas');c.width=r.w;c.height=r.h;let ctx=c.getContext('2d');ctx.putImageData(new ImageData(r.data,r.w,r.h),0,0);blob=await new Promise(ok=>c.toBlob(ok,'image/png'));if(!blob)throw Error('Gagal membuat PNG.');name=f.name.replace(/\.dds$/i,'')+'.png';let im=document.createElement('img');im.src=URL.createObjectURL(blob);$('ddsPreview').innerHTML='';$('ddsPreview').append(im);showDdsSuccess();}else{let bmp=await createImageBitmap(f);if(bmp.width>16384||bmp.height>16384)throw Error('Gambar terlalu besar.');let fmt=document.querySelector('input[name="ddsFormat"]:checked').value,mips=$('ddsMips').checked,levels=await makeMipLevels(bmp,mips);if(fmt==='dxt1'){let hasAlpha=false;for(let i=3;i<levels[0].data.length;i+=4)if(levels[0].data[i]<250){hasAlpha=true;break;}if(hasAlpha)status('ddsStatus','Peringatan: DXT1 tidak mempertahankan alpha secara halus. Pilih DXT5 jika tekstur memiliki transparansi.');}blob=levelsToDDS(levels,fmt);name=f.name.replace(/\.png$/i,'')+'.dds';showDdsSuccess();}outputs.dds={blob,name};btn.textContent='DOWNLOAD';}catch(e){status('ddsStatus','Gagal: '+e.message,'bad')}finally{btn.disabled=false;}};
+function fmtBlob(n){return fmt(n)}
+
+let ffmpeg=null,ffmpegLoading=null,ffmpegObjectURLs=[],activeMediaProgress=null;
+function mediaProgress(kind,p,label,indeterminate=false){
+ const prog=$(kind+'Progress'),bar=$(kind+'Bar'),stage=$(kind+'Stage'),pct=$(kind+'Pct');
+ if(!prog||!bar)return;
+ prog.style.display='block';prog.classList.toggle('indeterminate',!!indeterminate);
+ if(!indeterminate)bar.style.width=Math.max(0,Math.min(100,p))+'%';
+ if(stage&&label)stage.textContent=label;
+ if(pct)pct.textContent=indeterminate?'…':Math.round(p)+'%';
+}
+async function blobAsset(url,mime){
+ const r=await fetch(url,{mode:'cors'});if(!r.ok)throw Error('Gagal memuat aset FFmpeg ('+r.status+'): '+url);
+ const b=await r.blob();const u=URL.createObjectURL(new Blob([b],{type:mime}));ffmpegObjectURLs.push(u);return u;
+}
+async function getFF(){
+ if(ffmpeg&&ffmpeg.loaded)return ffmpeg;
+ if(ffmpegLoading)return ffmpegLoading;
+ ffmpegLoading=(async()=>{
+  if(!window.FFmpegWASM||!window.FFmpegWASM.FFmpeg)throw Error('Library FFmpeg belum termuat. Periksa koneksi internet/CDN, lalu muat ulang halaman.');
+  const x=new window.FFmpegWASM.FFmpeg();
+  const base='https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/umd';
+  const workerBase='https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd';
+  status('audioStatus','Menyiapkan mesin FFmpeg WebAssembly dan Worker…');
+  // Worker wrapper juga harus dibuat same-origin terhadap halaman. Saat HTML dibuka
+  // dari file://, URL CDN langsung ditolak browser (origin null). Muat sebagai Blob.
+  const [coreURL,wasmURL,classWorkerURL]=await Promise.all([
+   blobAsset(base+'/ffmpeg-core.js','text/javascript'),
+   blobAsset(base+'/ffmpeg-core.wasm','application/wasm'),
+   blobAsset(workerBase+'/814.ffmpeg.js','text/javascript')
+  ]);
+  // Patch khusus UMD 0.12.10: build UMD membuat Worker dari URL chunk
+  // 814.ffmpeg.js berdasarkan URL script CDN. Di halaman file:// browser
+  // menolak Worker lintas-origin (origin null), meskipun core dan WASM sudah Blob.
+  // Alihkan hanya worker FFmpeg tersebut ke Blob lokal; worker lain tidak disentuh.
+  if(!window.__BLYNCCO_FFMPEG_WORKER_PATCH__){
+   const NativeWorker=window.Worker;
+   window.Worker=new Proxy(NativeWorker,{construct(target,args){
+    const workerURL=String(args[0]||'');
+    if(/(?:^|\/)814\.ffmpeg\.js(?:[?#].*)?$/.test(workerURL)){
+     args[0]=classWorkerURL;
+     args[1]=undefined;
+    }
+    return Reflect.construct(target,args);
+   }});
+   window.__BLYNCCO_FFMPEG_WORKER_PATCH__=true;
+  }
+  x.on('log',({message})=>{console.log('[BLYNCCO FFmpeg]',message);});
+  x.on('progress',({progress})=>{
+   const p=Math.max(20,Math.min(94,Math.round(20+(progress||0)*74)));
+   if(activeMediaProgress)mediaProgress(activeMediaProgress,p,'Mengonversi file…',false);
+  });
+  // classWorkerURL adalah worker wrapper milik @ffmpeg/ffmpeg, bukan worker core MT.
+  await x.load({coreURL,wasmURL,classWorkerURL});
+  ffmpeg=x;
+  return x;
+ })();
+ try{return await ffmpegLoading;}
+ catch(e){
+  ffmpegLoading=null;ffmpeg=null;
+  ffmpegObjectURLs.forEach(URL.revokeObjectURL);ffmpegObjectURLs=[];
+  throw e;
+ }
+}
+function safeMediaName(name,ext){return (name||'media').replace(/\.[^.]+$/,'').replace(/[\\/:*?"<>|]+/g,'_')+'.'+ext}
+async function ffWrite(x,path,data){await x.writeFile(path,data)}
+async function ffRun(x,args){const code=await x.exec(args);if(code!==0)throw Error('FFmpeg berhenti dengan kode '+code+'. Format mungkin tidak didukung oleh core.');}
+async function ffRead(x,path){return await x.readFile(path)}
+async function ffDelete(x,path){try{await x.deleteFile(path)}catch{}}
+async function runMedia(kind,outExt,args){
+ const f=selected[kind],btn=$(kind+'Convert'),prog=$(kind+'Progress'),bar=$(kind+'Bar');if(!f)return;
+ if(outputs[kind]){saveBlob(outputs[kind].blob,outputs[kind].name);return;}
+ btn.disabled=true;prog.style.display='block';activeMediaProgress=kind;
+ mediaProgress(kind,2,'Memulai…',false);let input='',output='';
+ try{
+  status(kind+'Status','Memuat mesin konversi FFmpeg…');
+  mediaProgress(kind,4,'Mengunduh dan menyiapkan FFmpeg…',true);
+  const x=await getFF();
+  mediaProgress(kind,15,'Mesin FFmpeg siap',false);
+  const ext=(f.name.split('.').pop()||'dat').toLowerCase().replace(/[^a-z0-9]/g,'')||'dat';input='bly_input.'+ext;output='bly_output.'+outExt;
+  await ffDelete(x,input);await ffDelete(x,output);
+  mediaProgress(kind,18,'Membaca file masukan…',true);
+  await ffWrite(x,input,new Uint8Array(await f.arrayBuffer()));
+  mediaProgress(kind,20,'File siap — konversi dimulai',false);
+  status(kind+'Status','Mengonversi '+f.name+'…');
+  await ffRun(x,['-i',input,...args,output]);
+  mediaProgress(kind,96,'Menyiapkan file hasil…',false);
+  const data=await ffRead(x,output);if(!data||!data.length)throw Error('FFmpeg tidak menghasilkan file output.');
+  const mime=outExt==='ogg'?'audio/ogg':outExt==='mp3'?'audio/mpeg':outExt==='wav'?'audio/wav':outExt==='flac'?'audio/flac':'video/mp4';const blob=new Blob([data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength)],{type:mime}),name=safeMediaName(f.name,outExt);
+  outputs[kind]={blob,name};mediaProgress(kind,100,'Selesai',false);btn.textContent='DOWNLOAD';status(kind+'Status','Berhasil! Ukuran hasil: '+fmt(blob.size)+'. Tekan DOWNLOAD untuk menyimpan.','good');
+ }catch(e){console.error(e);mediaProgress(kind,0,'Proses gagal',false);status(kind+'Status','Gagal mengonversi: '+(e.message||e)+'\\nPeriksa format file, ruang penyimpanan, dan koneksi CDN.','bad')}
+ finally{if(ffmpeg){if(input)await ffDelete(ffmpeg,input);if(output)await ffDelete(ffmpeg,output)}btn.disabled=!selected[kind];activeMediaProgress=null;}
+}$('audioOutput').addEventListener('change',()=> $('oggQualityWrap').classList.toggle('hide',$('audioOutput').value!=='ogg'));$('audioConvert').onclick=()=>{const out=$('audioOutput').value;let args=['-vn'];if(out==='ogg')args.push('-map','0:a:0','-c:a','libvorbis','-q:a',$('oggQuality').value,'-f','ogg');else if(out==='wav')args.push('-map','0:a:0','-c:a','pcm_s16le');else args.push('-map','0:a:0','-c:a','flac');if($('audioNormalize').checked)args.push('-af','loudnorm');runMedia('audio',out,args)};
+$('videoConvert').onclick=()=>{const bitrate=$('videoBitrate').value;if(!selected.video&&remoteVideoBlob)selected.video=new File([remoteVideoBlob],remoteVideoName||'video.mp4',{type:remoteVideoBlob.type||'video/mp4'});if(!selected.video)return;const start=Math.max(0,Number($('videoStart').value)||0),end=Number($('videoEnd').value),args=[];if(Number.isFinite(end)&&$('videoEnd').value.trim()!==''&&end<=start){status('videoStatus','Waktu akhir harus lebih besar dari waktu mulai.','bad');return}if(start>0)args.push('-ss',String(start));args.push('-vn');if(Number.isFinite(end)&&end>start)args.push('-t',String(end-start));if($('videoNormalize').checked)args.push('-af','loudnorm');args.push('-c:a','libmp3lame','-b:a',bitrate);runMedia('video','mp3',args)};
+async function exportVideoMp4(){let f=selected.video;if(!f&&remoteVideoBlob)f=new File([remoteVideoBlob],remoteVideoName||'video.mp4',{type:remoteVideoBlob.type||'video/mp4'});if(!f)return;const btn=$('videoConvertMp4');btn.disabled=true;let input='',output='';try{status('videoStatus','Memuat FFmpeg single-thread…');const x=await getFF();const ext=(f.name.split('.').pop()||'mp4').toLowerCase().replace(/[^a-z0-9]/g,'');input='bly_video_in.'+ext;output='bly_video_out.mp4';await ffDelete(x,input);await ffDelete(x,output);await ffWrite(x,input,new Uint8Array(await f.arrayBuffer()));const res=$('videoResolution').value;const args=['-i',input];if(res!=='original')args.push('-vf','scale=-2:'+res);args.push('-c:v','mpeg4','-q:v','5','-c:a','aac','-b:a','128k','-movflags','+faststart',output);status('videoStatus','Mengubah video ke MP4'+(res==='original'?' (resolusi asli)':' '+res+'p')+'…');await ffRun(x,args);const data=await ffRead(x,output);if(!data.length)throw Error('File output kosong.');const blob=new Blob([data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength)],{type:'video/mp4'});outputs.videoMp4={blob,name:safeMediaName(f.name,'mp4')};saveBlob(blob,outputs.videoMp4.name);status('videoStatus','Video MP4 berhasil dibuat ('+fmt(blob.size)+').','good')}catch(e){console.error(e);status('videoStatus','Gagal membuat MP4: '+(e.message||e)+'. Coba format video lain atau resolusi lebih rendah.','bad')}finally{if(ffmpeg){if(input)await ffDelete(ffmpeg,input);if(output)await ffDelete(ffmpeg,output)}btn.disabled=!selected.video&&!remoteVideoBlob}}
+$('videoConvertMp4').onclick=exportVideoMp4;
+let remoteVideoBlob=null,remoteVideoName='video.mp4';
+$('videoPaste').onclick=async()=>{try{if(!navigator.clipboard||!navigator.clipboard.readText)throw Error('Browser tidak mengizinkan akses clipboard dari halaman ini.');const clip=(await navigator.clipboard.readText()).trim();if(!clip)throw Error('Clipboard kosong.');$('videoUrl').value=clip;status('videoStatus','Link berhasil ditempel. Tekan PERIKSA LINK untuk melanjutkan.','good')}catch(e){status('videoStatus',(e.message||'Tidak bisa membaca clipboard')+' Tempel manual dengan menekan lama kolom link.','bad')}};
+$('videoCheck').onclick=async()=>{const raw=$('videoUrl').value.trim();selected.video=null;outputs.video=null;outputs.videoMp4=null;remoteVideoBlob=null;$('videoDownload').disabled=true;$('videoConvert').disabled=!selected.video;$('videoConvertMp4').disabled=!selected.video;if(!raw){status('videoStatus','Tempel tautan video terlebih dahulu.','bad');return}
+ let u;try{u=new URL(raw);if(!['http:','https:'].includes(u.protocol))throw Error()}catch{status('videoStatus','URL tidak valid. Gunakan tautan http atau https.','bad');return}
+ const host=u.hostname.toLowerCase().replace(/^www\./,'');
+ const platformHosts=['youtube.com','youtu.be','tiktok.com','instagram.com','facebook.com','fb.watch'];
+ if(platformHosts.some(h=>host===h||host.endsWith('.'+h))){
+  status('videoStatus','Tautan '+host+' terdeteksi, tetapi ini URL halaman platform, bukan file video langsung. HTML yang dibuka dari perangkat tidak bisa mengekstrak stream platform secara mandiri. Untuk mengaktifkan proses otomatis dari YouTube/TikTok/Instagram/Facebook dibutuhkan API downloader eksternal yang diizinkan atau backend pihak ketiga. Saat ini gunakan file video yang sudah diunduh, atau URL .mp4/.webm langsung yang mengizinkan CORS.','bad');return
+ }
+ const check=$('videoCheck');check.disabled=true;check.textContent='MEMERIKSA…';
+ try{status('videoStatus','Mengambil file. Tautan harus mengizinkan CORS…');const response=await fetch(u.href);if(!response.ok)throw Error('Server menjawab HTTP '+response.status+'.');const type=(response.headers.get('content-type')||'').toLowerCase();
+  if(!type.startsWith('video/')&&!/octet-stream/.test(type)&&! /\.(mp4|webm|mov|m4v|mkv)(\?|$)/i.test(u.pathname))throw Error('URL tidak dikenali sebagai file video langsung (Content-Type: '+(type||'tidak diketahui')+').');
+  const blob=await response.blob();if(!blob.size)throw Error('File kosong.');remoteVideoBlob=blob;remoteVideoName=decodeURIComponent(u.pathname.split('/').pop()||'video.mp4').replace(/[\\/:*?"<>|]+/g,'_');if(!/\.[a-z0-9]{2,5}$/i.test(remoteVideoName))remoteVideoName+='.'+(type.includes('webm')?'webm':'mp4');
+  $('videoDownload').disabled=false;$('videoConvert').disabled=false;$('videoConvertMp4').disabled=false;$('videoInfo').textContent=remoteVideoName+' • '+fmt(blob.size);$('videoInfo').classList.remove('hide');status('videoStatus','Link berhasil dibaca. Kamu bisa mengunduh video asli atau mengekstrak MP3.','good');
+ }catch(e){console.error(e);status('videoStatus','Tidak bisa membaca link: '+e.message+'\nPenyebab umum: CORS diblokir, URL bukan file langsung, atau server menolak permintaan.','bad')}
+ finally{check.disabled=false;check.textContent='PERIKSA LINK'}
+};
+$('videoDownload').onclick=()=>{if(remoteVideoBlob)saveBlob(remoteVideoBlob,remoteVideoName)};
+// Shortcut angka 1-3 untuk berpindah modul; tidak aktif saat pengguna mengetik.
+document.addEventListener('keydown',e=>{if(e.altKey&&!e.ctrlKey&&!e.metaKey&&['1','2','3'].includes(e.key)&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){e.preventDefault();document.querySelectorAll('.tab')[Number(e.key)-1].click()}});
+$('videoClear').addEventListener('click',()=>{remoteVideoBlob=null;remoteVideoName='video.mp4';outputs.videoMp4=null;selected.video=null;outputs.video=null;$('videoFile').value='';$('videoInfo').textContent='';$('videoInfo').classList.add('hide');$('videoPreview').innerHTML='';$('videoPreview').classList.add('hide');$('videoUrl').value='';$('videoDownload').disabled=true;$('videoConvert').disabled=true;$('videoConvertMp4').disabled=true;$('videoConvert').textContent='CONVERT';$('videoCheck').disabled=false;$('videoCheck').textContent='PERIKSA LINK';$('videoStart').value='0';$('videoEnd').value='';status('videoStatus','Pilih file video atau periksa tautan langsung.');});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js"></script>
+</body></html>
